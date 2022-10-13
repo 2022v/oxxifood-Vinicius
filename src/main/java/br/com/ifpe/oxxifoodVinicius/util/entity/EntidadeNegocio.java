@@ -2,7 +2,14 @@ package br.com.ifpe.oxxifoodVinicius.util.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,13 +18,19 @@ import lombok.Setter;
 @Setter
 @Getter
 @MappedSuperclass
-@EqualsAndHashCode(of = {"id"})
-public class EntidadeNegocio implements Serializable{
+@EqualsAndHashCode(of = { "id" })
+public abstract class EntidadeNegocio implements Serializable {
 
-	private static final long serialVersionUID = 1848098079296052528L;
+    private static final long serialVersionUID = 6166022111371021946L;
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Long id;
 
+    @JsonIgnore
+    @NotNull
+    @Column
+    private Boolean habilitado;
 
-	private Long id;
-	private Boolean habilitado;
 }
+
