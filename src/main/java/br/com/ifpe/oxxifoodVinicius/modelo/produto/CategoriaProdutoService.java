@@ -1,5 +1,7 @@
 package br.com.ifpe.oxxifoodVinicius.modelo.produto;
 
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.apache.commons.lang3.StringUtils;
@@ -45,4 +47,18 @@ public class CategoriaProdutoService extends GenericService {
         }
     }
     }
+    
+    @Transactional
+    public CategoriaProduto obterCategoriaPorID(Long id) {
+
+    return repository.findById(id).get();
+    }
+    
+
+    @Transactional
+    public List<CategoriaProduto> consultarPorChaveEmpresa(String chaveEmpresa) {
+
+    return repository.findByChaveEmpresaOrderByDescricaoAsc(chaveEmpresa);
+    }
+
 }
